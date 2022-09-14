@@ -10,7 +10,14 @@ public interface MoviesMapper extends BaseMapper<Movie> {
 
     Movie findById(Integer id);
 
-    void deleteMovie();
+    void deleteMovie(Integer id);
 
-    void insertMovie();
+
+    void insertMovie(Movie movie);
+
+
+    void deleteCategoryByMovies(Integer categoryId);
+
+    void updateMovie(Movie movie);
+
 }

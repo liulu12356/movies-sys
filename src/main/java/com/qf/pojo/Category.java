@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +20,7 @@ public class Category {
     private String name;
     private String comment;
     private String state;
-    private String createdTime;
-    private String modifiedTime;
+    private Date createdTime;
+    private Date modifiedTime;
 
 }

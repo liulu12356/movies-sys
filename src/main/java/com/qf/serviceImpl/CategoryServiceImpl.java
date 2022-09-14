@@ -14,8 +14,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     CategoryMapper categoryMapper;
-    @Autowired
-    MoviesMapper moviesMapper;
+
 
 
     @Override
@@ -30,14 +29,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void insertCategory() {
-        categoryMapper.insertCategory();
+    public void insertCategory(Category category) {
+        categoryMapper.insertCategory(category);
     }
 
     @Override
-    public void deleteCategory() {
+    public void deleteCategory(Integer id) {
+        categoryMapper.deleteCategory(id);
+        categoryMapper.deleteMovieByCategory(id);
+    }
 
-
-        categoryMapper.deleteCategory();
+    @Override
+    public void updateCategory(Category category) {
+        categoryMapper.updateCategory(category);
     }
 }

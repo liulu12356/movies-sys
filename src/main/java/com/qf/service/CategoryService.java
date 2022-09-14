@@ -12,8 +12,9 @@ public interface CategoryService {
 
     Category findById(Integer id);
 
-    void insertCategory();
+    void insertCategory(Category category);
 
-    void deleteCategory();
+    void deleteCategory(Integer id);
 
+    void updateCategory(Category category);
 }

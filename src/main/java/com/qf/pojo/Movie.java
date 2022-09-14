@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,12 +17,12 @@ public class Movie {
 
     @TableId(type = IdType.AUTO)
     private Integer id;
-    private String name;
+    private String title;
     private String description;
     private String detail;
     private String path;
     private String state;
-    private String createdTime;
-    private String modifiedTime;
+    private Date createdTime;
+    private Date modifiedTime;
 
 }

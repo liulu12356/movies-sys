@@ -17,15 +17,19 @@
     </select>
 
     <insert id="insertMovie" parameterType="Movie">
-        insert into movie values(null,#{name},#{desciption},#{detail},#{path},#{state},now(),#{modifier_time})
+        insert into movie values(null,#{title},#{description},#{detail},#{path},#{state},now(),#{modifiedTime})
     </insert>
 
     <update id="deleteMovie" >
-        update movie set state=0 where id =#{id}
+        update movie set state=0,modified_time=NOW() where id =#{id}
     </update>
 
-    <update id="updateMovieByCategory" >
-        update movie set state=0 where id =#{id}
+    <delete id="deleteCategoryByMovies">
+        delete from movie_category where movie_id=#{id}
+    </delete>
+
+    <update id="updateMovie" parameterType="Movie">
+        update movie set title=#{title},detail=#{detail},description=#{description},state=#{state},modified_time=NOW() where id=#{id}
     </update>
 
 
