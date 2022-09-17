@@ -39,4 +39,16 @@ public class MoviesServiceImpl implements MoviesService {
     public void updateMovie(Movie movie) {
         moviesMapper.updateMovie(movie);
     }
+
+    @Override
+    public List<Movie> findByTitle(String title) {
+        return moviesMapper.findByTitle(title);
+    }
+
+    @Override
+    public List<Movie> findByCategory(List<Integer> categoryId) {
+        return moviesMapper.findByCategory(categoryId);
+    }
+
+
 }

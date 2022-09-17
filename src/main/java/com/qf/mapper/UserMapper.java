@@ -5,4 +5,5 @@ import com.qf.pojo.User;
 
 public interface UserMapper extends BaseMapper<User> {
 
+    User checkLogin(User user);
 }

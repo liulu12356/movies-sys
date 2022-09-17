@@ -9,20 +9,20 @@
     <!--接下来它会把这个映射文件根据命名空间的声明，找到对应的Mapper接口，将各个SQL的id与Mapper接口中的各个方法对应上-->
 
     <select id="findById" resultType="Category">
-        select * from category where id = #{id} and state!=0
+        select * from category where id = #{id} and state=1
     </select>
 
     <select id="findAll" resultType="Category">
-        select * from category where state!=0
+        select * from category where state=1
     </select>
 
     <insert id="insertCategory" parameterType="Category">
-        insert into category values(null,#{name},#{comment},#{state},now(),#{modifierd_time})
+        insert into category values(null,#{name},#{comment},#{state},now(),null)
     </insert>
 
     <!--进行逻辑删除，即将state设置为0-->
     <update id="deleteCategory">
-        update category set state=0,modifie_time=now() where id =#{id}
+        update category set state=0,modified_time=now() where id =#{id}
     </update>
 
     <update id="updateCategory" parameterType="Category">
@@ -30,10 +30,22 @@
     </update>
 
 
-
     <delete id="deleteMovieByCategory">
         delete from movie_category  where category_id=#{id}
     </delete>
+
+    <select id="selectMovieByCategoryName" >
+        select m.* from movie m
+        left join movie_category mc on m.id=mc.movie_id
+        left join category c on mc.category_id=c.id where c.name in (#{num1},#{num2})
+    </select>
+
+    <select id="findByName" parameterType="java.lang.String" resultType="Category">
+        select * from category where name
+        <if test="name != null ">
+         like #{name}
+        </if>
+    </select>
 
 
 

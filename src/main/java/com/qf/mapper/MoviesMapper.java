@@ -20,4 +20,7 @@ public interface MoviesMapper extends BaseMapper<Movie> {
 
     void updateMovie(Movie movie);
 
+    List<Movie> findByTitle(String title);
+
+    List<Movie> findByCategory(List<Integer> categoryId);
 }

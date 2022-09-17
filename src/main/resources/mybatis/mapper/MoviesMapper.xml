@@ -13,11 +13,11 @@
     </select>
 
     <select id="findAll" resultType="Movie">
-        select * from movie
+        select * from movie where state=1
     </select>
 
     <insert id="insertMovie" parameterType="Movie">
-        insert into movie values(null,#{title},#{description},#{detail},#{path},#{state},now(),#{modifiedTime})
+        insert into movie values(null,#{title},#{description},#{detail},#{path},#{state},now(),null,0)
     </insert>
 
     <update id="deleteMovie" >
@@ -32,6 +32,19 @@
         update movie set title=#{title},detail=#{detail},description=#{description},state=#{state},modified_time=NOW() where id=#{id}
     </update>
 
+    <select id="findByTitle" parameterType="java.lang.String" resultType="Movie">
+        select * from movie where title
+        <if test="title != null ">
+            like #{title}
+        </if>
+    </select>
 
+    <select id="findByCategory" parameterType="list" resultType="Movie">
+        select m.* from movie m
+            left join movie_category mc on m.id = mc.movie_id
+            <where>
+                mc.category_id=#{id}
+            </where>
+    </select>
 
 </mapper>

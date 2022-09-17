@@ -43,4 +43,9 @@ public class CategoryServiceImpl implements CategoryService {
     public void updateCategory(Category category) {
         categoryMapper.updateCategory(category);
     }
+
+    @Override
+    public List<Category> findByName(String name) {
+        return categoryMapper.findByName(name);
+    }
 }

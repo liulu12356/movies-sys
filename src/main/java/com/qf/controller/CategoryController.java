@@ -25,19 +25,28 @@ public class CategoryController {
         return categoryService.findById(id);
     }
 
+    @GetMapping("/category/findByName/{name}")
+    List<Category> findByName(@PathVariable("name") String name) {
+        return categoryService.findByName("%"+name+"%");
+    }
+
     @PostMapping("/category")
-    void insertCategory(@RequestBody Category category) {
+    String insertCategory(@RequestBody Category category) {
         categoryService.insertCategory(category);
+        return "SaveOK";
     }
 
     @PutMapping("/category")
-    void updateCategory(@RequestBody Category category) {
+    String updateCategory(@RequestBody Category category) {
+        System.out.println(category);
         categoryService.updateCategory(category);
+        return "UpdateOK";
     }
 
     @DeleteMapping("/category/{id}")
-    void deleteCategory(@PathVariable("id") Integer id) {
+    String deleteCategory(@PathVariable("id") Integer id) {
         categoryService.deleteCategory(id);
+        return "OK";
     }
 
 

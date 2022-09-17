@@ -5,16 +5,18 @@
 <configuration>
 
     <settings>
-        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-<!--        <setting name="logImpl" value="LOG4J2"/>-->
+        <setting name="logImpl" value="LOG4J2"/>
     </settings>
 
     <typeAliases>
         <!--给类型取简单的别名-->
         <typeAlias alias="Category" type="com.qf.pojo.Category"/>
         <typeAlias alias="Movie" type="com.qf.pojo.Movie"/>
-        <!--<typeAlias alias="Office" type="com.qf.pojo.User"/>-->
+        <typeAlias alias="User" type="com.qf.pojo.User"/>
+        <typeAlias alias="Schedule" type="com.qf.pojo.Schedule"/>
+        <typeAlias alias="MovieCategory" type="com.qf.pojo.MovieCategory"/>
     </typeAliases>
 
 </configuration>

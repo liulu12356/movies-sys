@@ -20,4 +20,5 @@ public interface CategoryMapper extends BaseMapper<Category> {
     void deleteMovieByCategory(Integer category);
 
 
+    List<Category> findByName(String name);
 }

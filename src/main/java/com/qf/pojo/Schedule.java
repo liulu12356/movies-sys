@@ -7,15 +7,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@TableName("movie_category")
-public class MovieCategory {
+@AllArgsConstructor
+@TableName("schedule")
+public class Schedule {
 
     @TableId(type = IdType.AUTO)
     private Integer id;
-    private Integer MovieId;
-    private Integer categoryId;
+    private Integer movie_id;
+    private Date start;
+    private Date end;
+    private Integer status;
+
 }

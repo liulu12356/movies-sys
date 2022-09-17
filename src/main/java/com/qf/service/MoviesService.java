@@ -17,4 +17,8 @@ public interface MoviesService {
     void deleteMovie(Integer id);
 
     void updateMovie(Movie movie);
+
+    List<Movie> findByTitle(String title);
+
+    List<Movie> findByCategory(List<Integer> categoryId);
 }
