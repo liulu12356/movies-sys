@@ -1,5 +1,6 @@
 package com.qf.controller;
 
+import com.qf.pojo.Category;
 import com.qf.pojo.Movie;
 import com.qf.service.MoviesService;
 import lombok.extern.log4j.Log4j2;
@@ -27,7 +28,10 @@ public class MoviesController {
 
     @GetMapping("/movie/{id}")
     Movie findById(@PathVariable("id") Integer id) {
-        return moviesService.findById(id);
+        Movie movie = moviesService.findById(id);
+        final List<Category> categoryListByMovie = moviesService.findCategoryListByMovie(id);
+        movie.setCategoryList(categoryListByMovie);
+        return movie;
     }
 
     @GetMapping("/movie/findByTitle/{title}")
@@ -35,21 +39,28 @@ public class MoviesController {
         return moviesService.findByTitle("%"+title+"%");
     }
 
-    @GetMapping("/movie/findByCategory/{category}")
-    List<Movie> findMovieByCategory(@PathVariable("category") List<Integer> categoryIdList) {
+    //未排档电影根据标题查询
+    @GetMapping("/movie/findByTitle/noGear/{title}")
+    List<Movie> findByTitleNoGear(@PathVariable("title") String title) {
+        return moviesService.findByTitleNoGear("%"+title+"%");
+    }
+
+    @GetMapping("/movie/findByCategory/{categoryId}")
+    List<Movie> findMovieByCategory(@PathVariable("categoryId") List<Integer> categoryIdList) {
         return moviesService.findByCategory(categoryIdList);
     }
 
-    @PostMapping("/movie")
-    String insertMovie(String title, MultipartFile uploadPic,String description,String detail,Integer state) {
+    //未排档电影根据类别查询
+    @GetMapping("/movie/findByCategory/noGear/{categoryId}")
+    List<Movie> findMovieByCategoryNoGear(@PathVariable("categoryId") List<Integer> categoryIdList) {
+        return moviesService.findByCategoryNoGear(categoryIdList);
+    }
 
-        System.out.println(title);
-        System.out.println(uploadPic.getContentType());
-        System.out.println(uploadPic.getName());
-        // file.getBytes() // 具体的以字节流方式体现的文件数据
-        System.out.println(uploadPic.getOriginalFilename());
-        System.out.println(uploadPic.getSize());
+    @PostMapping("/movie")
+    String insertMovie(String title, MultipartFile uploadPic,String description,String detail,Integer state,@RequestParam("categoryIdList") List<Integer> categoryIdList) {
         Movie movie=new Movie(title,description,detail,state);
+        //新增中间表的数据
+
         try {
         String path = "E:\\myprojects\\movies-sys\\src\\webapp\\adminlte\\images\\" + uploadPic.getOriginalFilename();
         movie.setPath("\\adminlte\\images\\" + uploadPic.getOriginalFilename());
@@ -58,15 +69,21 @@ public class MoviesController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        moviesService.insertMovie(movie);
+        moviesService.insertMovie(movie,categoryIdList);
         return  "SaveOK";
     }
 
 
     @PutMapping("/movie")
-    String updateMovie(@RequestBody Movie Movie) {
-        moviesService.updateMovie(Movie);
+    String updateMovie(@RequestBody Movie movie) {
+        moviesService.updateMovie(movie,movie.getCategoryIdList());
         return "UpdateOK";
+    }
+
+    @GetMapping("/movie/updateStatus/{id}")
+    void updateStatus(@PathVariable("id") Integer id){
+        System.out.println(id);
+        moviesService.updateStatus(id);
     }
 
     @DeleteMapping("/movie/{id}")

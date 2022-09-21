@@ -10,9 +10,6 @@ import java.util.List;
 public interface ScheduleMapper extends BaseMapper<Schedule> {
     List<Movie> findScheduleMovie();
 
-
-    Movie findById(Integer id);
-
     List<Schedule> findScheduleListByMovieId(Integer id);
 
     void save(Schedule schedule);
@@ -20,4 +17,6 @@ public interface ScheduleMapper extends BaseMapper<Schedule> {
     void delete(Integer id);
 
     void updateStatus(@Param("id") Integer id, @Param("status") Integer status);
+
+    Schedule findScheduleById(Integer scheduleId);
 }

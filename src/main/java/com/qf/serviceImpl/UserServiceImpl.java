@@ -14,7 +14,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public String checkLogin(User user) {
         User userExit=userMapper.checkLogin(user);
-        System.out.println(userExit);
         if(userExit!=null){
             return "SUCCESS";
         }else{
@@ -26,4 +25,5 @@ public class UserServiceImpl implements UserService {
     public void insertUser(User user) {
 
     }
+
 }

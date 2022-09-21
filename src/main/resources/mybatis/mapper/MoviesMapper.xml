@@ -20,6 +20,10 @@
         insert into movie values(null,#{title},#{description},#{detail},#{path},#{state},now(),null,0)
     </insert>
 
+    <insert id="insertMovieCategory">
+        INSERT INTO movie_category values(null,#{movieId},#{categoryId})
+    </insert>
+
     <update id="deleteMovie" >
         update movie set state=0,modified_time=NOW() where id =#{id}
     </update>
@@ -32,6 +36,14 @@
         update movie set title=#{title},detail=#{detail},description=#{description},state=#{state},modified_time=NOW() where id=#{id}
     </update>
 
+    <update id="updateMovieStatus">
+        update movie set status=1 where id=#{id};
+    </update>
+
+    <update id="updateStatus">
+        update movie set status=2 where id=#{id};
+    </update>
+
     <select id="findByTitle" parameterType="java.lang.String" resultType="Movie">
         select * from movie where title
         <if test="title != null ">
@@ -39,12 +51,48 @@
         </if>
     </select>
 
-    <select id="findByCategory" parameterType="list" resultType="Movie">
+    <select id="findByCategory"  resultType="Movie">
         select m.* from movie m
             left join movie_category mc on m.id = mc.movie_id
-            <where>
-                mc.category_id=#{id}
-            </where>
+            where mc.category_id in
+            <foreach collection="list"  item="item" index="index"
+                open="(" separator="," close=")">
+                #{item}
+            </foreach>
+
+    </select>
+
+    <select id="findByCategoryNoGear"  resultType="Movie">
+        select m.* from movie m
+        left join movie_category mc on m.id = mc.movie_id
+        where mc.category_id in
+        <foreach collection="list"  item="item" index="index"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and status in(0,1) and state=1
+    </select>
+
+    <select id="findByTitleNoGear" parameterType="java.lang.String" resultType="Movie">
+        select * from movie where title
+        <if test="title != null ">
+            like #{title}
+        </if>
+        and status in(0,1) and state=1
+    </select>
+
+    <select id="findCategoryListByMovie" resultType="com.qf.pojo.Category">
+        select c.* from category c
+            left join movie_category mc on c.id = mc.category_id
+            where mc.movie_id=#{id}
+    </select>
+    <select id="findMovieIdBy" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select id from movie where title=#{title}
+    </select>
+
+
+    <select id="findMovieTicket" resultType="Movie">
+        select * from movie where status=2
     </select>
 
 </mapper>

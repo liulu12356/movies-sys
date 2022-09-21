@@ -38,14 +38,20 @@ public class Movie {
     @TableField(exist = false)
     private List<Category> categoryList;
 
+    @TableField(exist = false)
+    private List<Integer> categoryIdList;
+
+
+
+
+
+
     public Movie(String title, String description, String detail,Integer state) {
         this.title = title;
         this.description = description;
         this.detail = detail;
         this.state=state;
     }
-
-
 
 
 }

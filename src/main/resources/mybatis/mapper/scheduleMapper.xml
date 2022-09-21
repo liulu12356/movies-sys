@@ -12,17 +12,20 @@
        select * from movie where status in(0,1) and state=1
    </select>
     
-    <select id="findById" resultType="Movie">
-        SELECT * from movie where id=#{id}
-    </select>
+
 
     <!--通过电影id查相应的档期-->
     <select id="findScheduleListByMovieId" resultType="Schedule">
-
+        select s.* from schedule s
+            left join movie m on s.movie_id = m.id
+            where m.id=#{id}
+    </select>
+    <select id="findScheduleById" resultType="com.qf.pojo.Schedule">
+        select * from schedule where id=#{id};
     </select>
 
     <insert id="save" parameterType="Schedule">
-
+        insert into schedule values(null,#{movieId},#{start},#{end},0)
     </insert>
 
     <delete id="delete" parameterType="int">
