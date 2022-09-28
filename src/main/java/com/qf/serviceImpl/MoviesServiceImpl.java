@@ -6,18 +6,19 @@ import com.qf.pojo.Category;
 import com.qf.pojo.Movie;
 import com.qf.pojo.Schedule;
 import com.qf.service.MoviesService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class MoviesServiceImpl implements MoviesService {
 
-    @Autowired
-    MoviesMapper moviesMapper;
-    @Autowired
-    ScheduleMapper scheduleMapper;
+    final MoviesMapper moviesMapper;
+    final ScheduleMapper scheduleMapper;
+
+    public MoviesServiceImpl(MoviesMapper moviesMapper, ScheduleMapper scheduleMapper) {
+        this.moviesMapper = moviesMapper;
+        this.scheduleMapper = scheduleMapper;
+    }
 
     @Override
     public List<Movie> findAll() {
@@ -45,9 +46,8 @@ public class MoviesServiceImpl implements MoviesService {
     @Override
     public void updateMovie(Movie movie, List<Integer> categoryIdList) {
         moviesMapper.updateMovie(movie);
-        categoryIdList.forEach((categoryId)->{
-            moviesMapper.insertMovieCategory(movie.getId(),categoryId);
-        });
+        moviesMapper.deleteCategoryByMovies(movie.getId());
+        categoryIdList.forEach((categoryId)-> moviesMapper.insertMovieCategory(movie.getId(),categoryId));
     }
 
     @Override
@@ -88,7 +88,6 @@ public class MoviesServiceImpl implements MoviesService {
             movie.setScheduleList(scheduleList);
         });
         return movieTicket;
-
     }
 
 

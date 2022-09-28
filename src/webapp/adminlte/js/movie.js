@@ -220,6 +220,7 @@ if(!id) {
         contentType: false,
 
     })
+
 }else {
     $.ajax({
         type: "put",
@@ -235,7 +236,6 @@ if(!id) {
             }
         },
         contentType: "application/JSON;charset=utf-8"
-
     })
 }
 
@@ -246,6 +246,7 @@ let toSave = () => {
     $("#id").val("");
     $("#title").val("");
     $("#description").val("");
+    $("#selectMovieCategory").val("").trigger("change");
     $("#detail").val("");
     // $(`input:radio[name='status'][value=1]`).attr("checked", true);
 }

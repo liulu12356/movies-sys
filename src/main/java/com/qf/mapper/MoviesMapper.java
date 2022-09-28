@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface MoviesMapper extends BaseMapper<Movie> {
+
+
     List<Movie> findAll();
 
     Movie findById(Integer id);

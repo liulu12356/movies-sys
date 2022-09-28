@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Integer userId;
     private String username;
     private String password;
-    private Integer roleId;
+    private Integer role;
 
 
     public User(String username, String password) {

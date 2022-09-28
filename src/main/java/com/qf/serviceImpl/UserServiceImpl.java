@@ -12,13 +12,8 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public String checkLogin(User user) {
-        User userExit=userMapper.checkLogin(user);
-        if(userExit!=null){
-            return "SUCCESS";
-        }else{
-            return "FAILED";
-        }
+    public User checkLogin(User user) {
+        return userMapper.checkLogin(user);
     }
 
     @Override

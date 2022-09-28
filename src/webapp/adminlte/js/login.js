@@ -7,13 +7,17 @@ let checkLogin = () => {
             type: "post",
             url: "/user/login",
             data:{username,password},
-            success: (data) => {
-                if (data === "SUCCESS") {
-                    // console.log(">>>" + data);
+            success: (user) => {
+                if (user) {
+                    console.log(user)
                     // 把登录用户的信息存储在sessionStorage
                     sessionStorage.setItem("userInSession", username);
-
-                    location.href = "/adminlte/site/category.html";
+                    sessionStorage.setItem("userId", user.userId);
+                    if(user.role===0){
+                        location.href = "/adminlte/site/category.html";
+                    } else {
+                        location.href = "/adminlte/site/customer_movie.html";
+                    }
                 } else {
                     //提示用户名密码错误
                     $("#tips").text("用户名或密码错误");

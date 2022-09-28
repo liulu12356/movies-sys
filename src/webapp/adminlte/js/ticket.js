@@ -24,7 +24,7 @@ let fillTbody = (movieList, tb) => {
         tr.appendTd(movie.title);
 
         for (const schedule of movie.scheduleList) {
-            const scheduleBtn=schedule.status?`<button type="button" class="btn btn-success  mx-1" onclick="ToTitleModal(${schedule.id})" data-toggle="modal" disabled data-target="#modal-del">
+            const scheduleBtn=schedule.status?`<button type="button" class="btn btn-secondary  mx-1" onclick="ToTitleModal(${schedule.id})" data-toggle="modal" disabled data-target="#modal-del">
                          档期${schedule.id}</button>` : `<button type="button" class="btn btn-danger  mx-1" onclick="ToTitleModal(${schedule.id})" data-toggle="modal"  data-target="#modal-del">
                          档期${schedule.id}</button>`
 
@@ -47,7 +47,7 @@ let findByKeyword = () => {
     } else {
         $.ajax({
             type: "get",
-            url: `/movie/findByTitle/${keyword}`,
+            url: `/ticket/findByTitle/${keyword}`,
             success: (data) => {
                 // 清空
                 let tbody = $("#tb");

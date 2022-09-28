@@ -23,6 +23,11 @@ public class TicketController {
 
     }
 
+    @GetMapping("/ticket/findByTitle/{keyword}")
+    List<Movie> findMovieByTitle(@PathVariable("keyword") String title){
+        return ticketService.findMovieByTitle(title);
+
+    }
 
     @GetMapping("/ticket")
     List<Movie> findMovieTicket() {

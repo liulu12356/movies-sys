@@ -13,7 +13,7 @@ public class UserController {
 
     //如果使用post提交，可以直接获取提交表单对应key的值
     @PostMapping("/user/login")
-    String checkLogin(String username,String password){
+    User checkLogin(String username,String password){
         User user=new User(username,password);
         return  userService.checkLogin(user);
     }

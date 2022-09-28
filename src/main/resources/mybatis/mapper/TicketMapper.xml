@@ -12,4 +12,8 @@
     <update id="updateSchedule">
         update schedule set status=1 where id=#{id}
     </update>
+
+    <select id="findMovieTicketByTitle" resultType="com.qf.pojo.Movie">
+        select * from movie where status=2 and title like #{title}
+    </select>
 </mapper>

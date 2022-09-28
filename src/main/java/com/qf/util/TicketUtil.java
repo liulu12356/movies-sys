@@ -1,8 +1,6 @@
 package com.qf.util;
 
 import com.qf.pojo.Ticket;
-import org.apache.logging.log4j.core.pattern.FormattingInfo;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +17,7 @@ public class TicketUtil {
         for (int i=0;i<line;i++){
                 for (int j=0;j<column;j++){
                     String seq=LINE[i]+j;
-                    Ticket ticket=new Ticket(null,movieId,scheduleId,seq,0,new Date(),null);
+                    Ticket ticket=new Ticket(null,movieId,scheduleId,seq,1,new Date(),null,null,null);
                     ticketList.add(ticket);
                 }
         }
@@ -32,7 +30,7 @@ public class TicketUtil {
         for (int i=0;i<5;i++){
             for (int j=0;j<10;j++){
                 String seq=LINE[i]+j;
-                Ticket ticket=new Ticket(null,movieId,scheduleId,seq,0,new Date(),null);
+                Ticket ticket=new Ticket(null,movieId,scheduleId,seq,0,new Date(),null,null,null);
                 ticketList.add(ticket);
             }
         }

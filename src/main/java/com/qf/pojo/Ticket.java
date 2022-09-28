@@ -23,4 +23,6 @@ public class Ticket {
     private Integer status;
     private Date  createdTime;
     private Date  modifiedTime;
+    private Integer userId;
+    private Date buyTime;
 }

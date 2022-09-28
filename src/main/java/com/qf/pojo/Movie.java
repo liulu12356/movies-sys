@@ -44,8 +44,6 @@ public class Movie {
 
 
 
-
-
     public Movie(String title, String description, String detail,Integer state) {
         this.title = title;
         this.description = description;
