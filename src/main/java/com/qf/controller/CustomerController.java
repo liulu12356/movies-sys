@@ -1,6 +1,7 @@
 package com.qf.controller;
 
 import com.qf.pojo.Movie;
+import com.qf.pojo.Schedule;
 import com.qf.pojo.Ticket;
 import com.qf.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,11 @@ public class CustomerController {
     @GetMapping("/customerMovie")
     List<Movie> findMovieByStatus(){
         return customerService.findMovieByStatus();
+    }
+
+    @GetMapping("/customer/schedule/{mid}")
+    List<Schedule> findScheduleTicket(@PathVariable("mid") Integer movieId){
+        return  customerService.findScheduleTicket(movieId);
     }
 
     @GetMapping("/ticket/{scheduleId}")

@@ -1,4 +1,9 @@
+let loadUserInSession = () => {
+    let name = sessionStorage.getItem("userInSession");
+    $("#loginUser").text(name);
+};
 
+loadUserInSession();
 let movieBean=null;
 let fillTbody = (movieList, tb) => {
     //填充tbody

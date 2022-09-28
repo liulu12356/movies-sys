@@ -2,6 +2,7 @@ package com.qf.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.qf.pojo.Movie;
+import com.qf.pojo.Schedule;
 import com.qf.pojo.Ticket;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,4 +17,6 @@ public interface CustomerMapper extends BaseMapper<Object> {
     void updateTicket(@Param("tid") int ticketId,@Param("userId") Integer userId,@Param("version") Integer version);
 
     Integer findVersionByTid(int ticketId);
+
+    List<Schedule> findScheduleTicket(Integer movieId);
 }

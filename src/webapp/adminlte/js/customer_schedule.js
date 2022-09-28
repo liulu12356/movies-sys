@@ -62,7 +62,7 @@ let loadScheduleList = () => {
 
     $.ajax({
         type: "get",
-        url: `/schedule/${mid}`,
+        url: `/customer/schedule/${mid}`,
         success: (data) => {
             const tbody = $("#tb");
             fillTbody(data, tbody);
