@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--Spring整合任何其它第三方的框架、组件、中间件，最本质的问题，就是把这些第三方中的核心组件的生命周期交给Spring管理-->
+
+    <!--激活IoC、DI服务相关的注解
+        IoC
+            @Controller @RestController @Service @Repository @Component 这些注解都可以让Spring来创建对应类的实例，本质上没有区别，
+            只是通过单词的含义表明这个类的身份（它是干什么的）
+        DI
+            @AutoWired @Resource
+    -->
+    <context:annotation-config/>
+    <!--声明加了IoC和DI相关注解的这些类在哪些包里面-->
+    <context:component-scan base-package="com.qf"/>
+
+    <!--让Spring的核心组件DispatcherServlet接管所有的请求，然后把请求根据路径派发到相应的Controller-->
+    <!--还有前端提交数据的映射和绑定-->
+    <!--还有开启相应的类型转换-->
+    <!--以及其它的MVC辅助功能套件-->
+    <mvc:annotation-driven/>
+
+
+    <mvc:resources mapping="/adminlte/**" location="/adminlte/"/>
+    <mvc:resources mapping="/adminlte/**" location="/adminlte/"/>
+
+
+</beans>
